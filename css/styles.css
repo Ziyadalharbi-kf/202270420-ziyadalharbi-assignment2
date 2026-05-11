@@ -1,105 +1,146 @@
-/* General Reset */
+/* --- Variables for Light & Dark Theme --- */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --card-bg: #f4f4f4;
+    --btn-bg: #0056b3;
+    --btn-text: #ffffff;
+    --border-color: #dddddd;
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --card-bg: #1e1e1e;
+    --btn-bg: #bb86fc;
+    --btn-text: #000000;
+    --border-color: #333333;
+}
+
+/* --- Global Styles & Animations --- */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
+    /* Animation Requirement: Smooth transition between themes */
+    transition: background-color 0.4s ease, color 0.4s ease; 
 }
 
-/* Navigation */
-nav {
-    background: #2c3e50;
-    color: #fff;
-    padding: 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-nav ul {
+/* --- Layout & Sections --- */
+header {
     display: flex;
-    justify-content: center;
-    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.4s ease;
 }
 
-nav ul li {
-    margin: 0 15px;
+main {
+    padding: 20px 5%;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* Section Styling */
 section {
-    padding: 60px 20px;
-    max-width: 800px;
-    margin: auto;
+    margin-bottom: 40px;
 }
 
-/* Project Grid (Requirement #3 - Responsive) */
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on desktop */
+h2 {
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--btn-bg);
+    display: inline-block;
+}
+
+/* --- Project Cards --- */
+.project-container {
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
-    margin-top: 20px;
 }
 
 .project-card {
-    background: #fff;
+    background-color: var(--card-bg);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 250px;
+    border: 1px solid var(--border-color);
+    /* Animation Requirement: Smooth hover transition */
+    transition: transform 0.3s ease, background-color 0.4s ease;
 }
 
-.placeholder {
-    background: #ddd;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-    color: #666;
+.project-card:hover {
+    transform: translateY(-5px); /* Card lifts up when hovered */
 }
 
-/* Contact Form */
-#contact-form {
+/* --- Forms & Buttons --- */
+form {
     display: flex;
     flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
 }
 
-#contact-form input, #contact-form textarea {
-    margin-bottom: 10px;
+input, textarea {
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
-#contact-form button {
-    background: #27ae60;
-    color: white;
-    padding: 10px;
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+button {
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
     border: none;
-    border-radius: 4px;
+    padding: 10px 20px;
     cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    /* Animation Requirement */
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-/* Responsive Media Query (Requirement #3) */
-@media (max-width: 600px) {
-    .project-grid {
-        grid-template-columns: 1fr; /* 1 column on mobile */
-    }
-    
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
+button:hover {
+    opacity: 0.9;
+    transform: scale(1.02); /* Slight grow on hover */
+}
+
+/* --- Error Handling / User Feedback Styles --- */
+.feedback-msg {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    background-color: #ffcccc;
+    color: #cc0000;
+    border: 1px solid #cc0000;
+}
+
+.success {
+    background-color: #ccffcc;
+    color: #006600;
+    border: 1px solid #006600;
 }
